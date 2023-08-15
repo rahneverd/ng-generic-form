@@ -2,6 +2,7 @@
   <div *ngFor="let control of jsonFormData?.controls">
     <label>{{ control.label }}</label>
     <input
+      *ngIf="control.type !== 'radio'"
       [type]="control.type"
       [formControlName]="control.name"
       [value]="control.value"

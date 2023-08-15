@@ -19,15 +19,16 @@ export class GenericFormComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.jsonFormData);
+    this.createForm(this.jsonFormData.controls);
   }
 
   createForm(controls: any) {
-    // for (const control of controls) {
-    //   this.myForm.addControl(
-    //     control.name,
-    //     this.fb.control(control.value, Validators.required)
-    //   );
-    // }
+    for (const control of controls) {
+      this.myForm.addControl(
+        control.name,
+        this.fb.control(control.value, Validators.required)
+      );
+    }
   }
 
   onButtonClicked() {}

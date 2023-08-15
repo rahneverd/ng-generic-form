@@ -51,13 +51,6 @@ export class DataService {
         },
         validators: {},
       },
-      {
-        name: 'lightDark',
-        label: 'Do you like toggles?',
-        value: 'false',
-        type: 'toggle',
-        validators: {},
-      },
     ],
   });
   jsonFormData$ = this.jsonFormData.asObservable();
