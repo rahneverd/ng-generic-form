@@ -1,50 +1,34 @@
-import { ChangeDetectionStrategy, Component,OnInit,Input } from '@angular/core';
-
-interface JsonFormValidators {
-  min?: number;
-  max?: number;
-  required?: boolean;
-  requiredTrue?: boolean;
-  email?: boolean;
-  minLength?: boolean;
-  maxLength?: boolean;
-  pattern?: string;
-  nullValidator?: boolean;
-}
-interface JsonFormControlOptions {
-  min?: string;
-  max?: string;
-  step?: string;
-  icon?: string;
-}
-interface JsonFormControls {
-  name: string;
-  label: string;
-  value: string;
-  type: string;
-  options?: JsonFormControlOptions;
-  required: boolean;
-  validators: JsonFormValidators;
-}
-export interface JsonFormData {
-  controls: JsonFormControls[];
-}
-
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-generic-form',
   templateUrl: './generic-form.component.html',
   styleUrls: ['./generic-form.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GenericFormComponent implements OnInit{
+export class GenericFormComponent implements OnInit {
+  jsonFormData: any;
+  myForm: FormGroup = this.fb.group({});
 
-  @Input() jsonFormData: JsonFormData;
-
-  constructor() {}
+  constructor(private dataService: DataService, private fb: FormBuilder) {
+    this.dataService.jsonFormData$.subscribe((data) => {
+      this.jsonFormData = data;
+    });
+  }
 
   ngOnInit(): void {
-    
+    console.log(this.jsonFormData);
   }
-  
+
+  createForm(controls: any) {
+    // for (const control of controls) {
+    //   this.myForm.addControl(
+    //     control.name,
+    //     this.fb.control(control.value, Validators.required)
+    //   );
+    // }
+  }
+
+  onButtonClicked() {}
 }
